@@ -35,3 +35,17 @@ Start the server
 ```bash
   npm run start
 ```
+
+## Environment Variables
+
+To run this project, you will need to add the following environment variables to your .env file
+
+`REACT_APP_API_KEY`
+
+
+## Link
+
+This project has been deployed using Netlify
+
+[Demo link](https://frontend-dev-reactjs.netlify.app)
+
