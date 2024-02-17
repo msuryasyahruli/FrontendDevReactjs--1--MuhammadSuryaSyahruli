@@ -42,11 +42,15 @@ const MainBody = () => {
     : openClose.filter(
         (restaurants) => restaurants.priceRange === `${IsPrice}`
       );
-  const category = !IsPrice
-    ? restaurants.filter(
+  const category = IsPrice
+    ? priceRange.filter(
         (restaurants) => restaurants.cuisine === `${IsCategory}`
       )
-    : priceRange.filter(
+    : IsCheck
+    ? openClose.filter(
+        (restaurants) => restaurants.cuisine === `${IsCategory}`
+      )
+    : restaurants.filter(
         (restaurants) => restaurants.cuisine === `${IsCategory}`
       );
   const arrLenght = IsCategory
