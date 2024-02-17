@@ -6,17 +6,56 @@ import axios from "axios";
 const MainBody = () => {
   const [restaurants, setRestaurants] = React.useState([]);
 
-  const [IsCheck, setIsCheck] = React.useState(false)
-  const handleCheck = () =>{
-    setIsCheck(!IsCheck)
-  }
-
   const [arr, setArr] = React.useState(8);
   const handleClick = () => {
     setArr(arr + 8);
   };
 
-  const arrLenght = !IsCheck ? restaurants.slice(0, arr) : restaurants.filter(restaurants => restaurants.openClose === "OPEN NOW")
+  const [IsCheck, setIsCheck] = React.useState(false);
+  const handleCheck = () => {
+    setIsCheck(!IsCheck);
+  };
+
+  const [IsPrice, setIsPrice] = React.useState(false);
+  const handlePrice = (value) => {
+    setIsPrice(value);
+  };
+
+  const [IsCategory, setIsCategory] = React.useState(false);
+  const handleCategory = (value) => {
+    setIsCategory(value);
+  };
+
+  const handleReset = () => {
+    setIsCheck(false);
+    setIsPrice(false);
+    setIsCategory(false);
+  };
+
+  const openClose = restaurants.filter(
+    (restaurants) => restaurants.openClose === "OPEN NOW"
+  );
+  const priceRange = !IsCheck
+    ? restaurants.filter(
+        (restaurants) => restaurants.priceRange === `${IsPrice}`
+      )
+    : openClose.filter(
+        (restaurants) => restaurants.priceRange === `${IsPrice}`
+      );
+  const category = !IsPrice
+    ? restaurants.filter(
+        (restaurants) => restaurants.cuisine === `${IsCategory}`
+      )
+    : priceRange.filter(
+        (restaurants) => restaurants.cuisine === `${IsCategory}`
+      );
+  const arrLenght = IsCategory
+    ? category
+    : IsPrice
+    ? priceRange
+    : IsCheck
+    ? openClose
+    : restaurants.slice(0, arr);
 
   React.useEffect(() => {
     axios
@@ -32,8 +71,18 @@ const MainBody = () => {
 
   return (
     <>
-      <FilterNavigation handleCheck={handleCheck} />
-      <Card handleClick={handleClick} arrLenght={arrLenght} arr={arr} restaurants={restaurants} />
+      <FilterNavigation
+        handleCheck={handleCheck}
+        handlePrice={handlePrice}
+        handleCategory={handleCategory}
+        handleReset={handleReset}
+      />
+      <Card
+        handleClick={handleClick}
+        arrLenght={arrLenght}
+        arr={arr}
+        restaurants={restaurants}
+      />
     </>
   );
 };

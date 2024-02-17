@@ -4,7 +4,7 @@ import { GoDotFill } from "react-icons/go";
 import { Link } from "react-router-dom";
 import { Rating } from "@mui/material";
 
-const Card = ({handleClick, arrLenght, arr, restaurants}) => {
+const Card = ({ handleClick, arrLenght, arr, restaurants }) => {
   return (
     <>
       <section className="grid grid-cols-2 gap-2 mb-4 lg:grid-cols-4 md:grid-cols-3 sm:gap-6">
